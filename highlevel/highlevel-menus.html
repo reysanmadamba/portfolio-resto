@@ -465,8 +465,10 @@
         <p><a href="#">Links</a> &nbsp; <a href="#">Employee Portal</a></p>
         <div class="social-icons">
             <!-- <a href="#"><i class="fa-solid fa-link"></i></a> -->
-            <a href="https://www.instagram.com/highleveldiner/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.facebook.com/highleveldineryeg"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/highleveldiner/" target="_blank"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/highleveldineryeg" target="_blank"><i
+                    class="fa-brands fa-facebook-f"></i></a>
             <!-- <a href="#"><i class="fa-brands fa-tripadvisor"></i></a> -->
             <!-- <a href="#"><i class="fa-solid fa-link"></i></a> -->
         </div>
@@ -479,60 +481,7 @@
         <p class="footer-fine">Opt in to receive news and updates.</p>
     </footer>
 
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", () => {
 
-            // NAV
-            const toggle = document.getElementById("navToggle");
-            const menu = document.getElementById("mobileMenu");
-            const closeBtn = document.getElementById("navClose");
-
-            toggle.onclick = () => menu.classList.add("active");
-            closeBtn.onclick = () => menu.classList.remove("active");
-
-            document.querySelectorAll(".mobile-menu a").forEach(link => {
-                link.addEventListener("click", () => {
-                    menu.classList.remove("active");
-                });
-            });
-
-            // MODAL
-            const modal = document.getElementById("reservationModal");
-            const frame = document.getElementById("toastFrame");
-            const fallback = document.getElementById("fallbackMsg");
-
-            // OPEN FROM NAV
-            window.openReservationFromNav = function (e) {
-                e.preventDefault();
-
-                const today = new Date();
-                const formatted = today.toISOString();
-
-                const url = `https://tables.toasttab.com/restaurants/605ed5a7-f0de-4ccd-a5c0-31c514082741/reserve?partySize=2&dateTime=${formatted}`;
-
-                frame.src = url;
-                modal.style.display = "block";
-            };
-
-            // CLOSE
-            document.querySelector(".res-close").onclick = () => {
-                modal.style.display = "none";
-                frame.src = "";
-            };
-
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                    frame.src = "";
-                }
-            };
-
-            window.openToastDirect = function () {
-                window.open(frame.src, "_blank");
-            };
-
-        });
-    </script> -->
 
     <div id="reservationModal" class="res-modal">
         <div class="res-modal-content">

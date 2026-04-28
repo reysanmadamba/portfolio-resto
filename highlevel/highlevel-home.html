@@ -145,8 +145,10 @@
         <p><a href="#">Links</a> &nbsp; <a href="#">Employee Portal</a></p>
         <div class="social-icons">
             <!-- <a href="#"><i class="fa-solid fa-link"></i></a> -->
-            <a href="https://www.instagram.com/highleveldiner/"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.facebook.com/highleveldineryeg"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/highleveldiner/" target="_blank"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/highleveldineryeg" target="_blank"><i
+                    class="fa-brands fa-facebook-f"></i></a>
             <!-- <a href="#"><i class="fa-brands fa-tripadvisor"></i></a> -->
             <!-- <a href="#"><i class="fa-solid fa-link"></i></a> -->
         </div>
@@ -158,149 +160,6 @@
         </div>
         <p class="footer-fine">Opt in to receive news and updates.</p>
     </footer>
-
-
-
-
-
-    <!-- JS  -->
-    <!-- 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-
-            // NAV
-            const toggle = document.getElementById("navToggle");
-            const menu = document.getElementById("mobileMenu");
-            const closeBtn = document.getElementById("navClose");
-
-            toggle.onclick = () => menu.classList.add("active");
-            closeBtn.onclick = () => menu.classList.remove("active");
-
-            document.querySelectorAll(".mobile-menu a").forEach(link => {
-                link.addEventListener("click", () => {
-                    menu.classList.remove("active");
-                });
-            });
-
-            // MODAL
-            const modal = document.getElementById("reservationModal");
-            const frame = document.getElementById("toastFrame");
-            const fallback = document.getElementById("fallbackMsg");
-
-            // 🔥 OPEN RESERVATION (UPDATED)
-            window.openReservation = function () {
-                const date = document.getElementById("resDate").value;
-                const time = document.getElementById("resTime").value;
-                const people = document.getElementById("resPeople").value || 2;
-
-                if (!date || !time) {
-                    alert("Please select date and time");
-                    return;
-                }
-
-                // combine date + time
-                const dateTime = new Date(`${date}T${time}`);
-                const formatted = formatToToast(date, time);
-
-                const url = `https://tables.toasttab.com/restaurants/605ed5a7-f0de-4ccd-a5c0-31c514082741/reserve?partySize=${people}&dateTime=${formatted}`;
-
-                frame.src = url;
-                modal.style.display = "block";
-
-                // fallback check
-                setTimeout(() => {
-                    try {
-                        const test = frame.contentWindow.location.href;
-                    } catch (e) {
-                        fallback.style.display = "block";
-                    }
-                }, 1500);
-            };
-
-            // CLOSE MODAL
-            document.querySelector(".res-close").onclick = () => {
-                modal.style.display = "none";
-                frame.src = "";
-            };
-
-            //format time to MT
-            function formatToToast(date, time) {
-                const dt = new Date(`${date}T${time}`);
-
-                const year = dt.getFullYear();
-                const month = String(dt.getMonth() + 1).padStart(2, '0');
-                const day = String(dt.getDate()).padStart(2, '0');
-                const hours = String(dt.getHours()).padStart(2, '0');
-                const minutes = String(dt.getMinutes()).padStart(2, '0');
-
-                // get timezone offset (e.g. -06:00)
-                const offset = -dt.getTimezoneOffset();
-                const sign = offset >= 0 ? "+" : "-";
-                const offsetHours = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
-                const offsetMinutes = String(Math.abs(offset) % 60).padStart(2, '0');
-
-                return `${year}-${month}-${day}T${hours}:${minutes}:00.000${sign}${offsetHours}:${offsetMinutes}`;
-            }
-
-            // DEFAULT VALUES
-            const today = new Date();
-
-            // set date (YYYY-MM-DD)
-            document.getElementById("resDate").value = today.toISOString().split("T")[0];
-
-            // set default time (e.g. 09:00)
-            document.getElementById("resTime").value = "09:00";
-
-            // set default people
-            document.getElementById("resPeople").value = 2;
-
-            // CLICK OUTSIDE CLOSE
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                    frame.src = "";
-                }
-            };
-
-            // nav pop out modal 
-            window.openReservationFromNav = function (e) {
-                e.preventDefault();
-
-                // OPTIONAL: auto-fill date/time so no alert
-                const today = new Date();
-                document.getElementById("resDate").value = today.toISOString().split("T")[0];
-                document.getElementById("resTime").value = "09:00";
-                document.getElementById("resPeople").value = 2;
-
-                // open modal
-                openReservation();
-            };
-
-            // FALLBACK BUTTON
-            window.openToastDirect = function () {
-                window.open(frame.src, "_blank");
-            };
-
-            window.goToReservation = function (e) {
-                e.preventDefault();
-
-                const section = document.getElementById("reservationSection");
-
-                const today = new Date();
-                document.getElementById("resDate").value = today.toISOString().split("T")[0];
-                document.getElementById("resTime").value = "09:00";
-
-                // smooth scroll
-                section.scrollIntoView({ behavior: "smooth" });
-
-                // open modal after scroll
-                setTimeout(() => {
-                    openReservation();
-                }, 500);
-            };
-
-        });
-    </script> -->
 
 
     <!-- RESERVATION MODAL -->
