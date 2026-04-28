@@ -70,12 +70,20 @@ nav {
     text-transform: uppercase;
     color: var(--text-dark);
     text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.2s;
+
+    padding-bottom: 4px;
+
+    border-bottom: 1.5px solid transparent;
+    /* invisible by default */
+    transition: border-color 0.2s ease;
 }
 
-.nav-links li a:hover,
+/* show underline on hover */
+.nav-links li a:hover {
+    border-bottom-color: var(--text-dark);
+}
+
+/* keep underline ONLY on active page */
 .nav-links li a.active {
     border-bottom-color: var(--text-dark);
 }
