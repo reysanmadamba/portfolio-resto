@@ -276,6 +276,9 @@ footer a {
     color: var(--text-muted);
     letter-spacing: 0.06em;
     margin-bottom: 22px;
+
+    letter-spacing: 1em;
+    text-align: center;
 }
 
 .intro-divider {
@@ -917,6 +920,15 @@ body {
     color: #111;
 }
 
+.mobile-menu a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.mobile-menu a:visited {
+    color: inherit;
+}
+
 /* 🔥 MOBILE BREAKPOINT */
 @media (max-width: 900px) {
 
@@ -932,4 +944,37 @@ body {
     nav {
         justify-content: space-between;
     }
+}
+
+
+/* MODAL BACKGROUND */
+.res-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* MODAL CONTENT */
+.res-modal-content {
+    position: relative;
+    margin: 5% auto;
+    width: 90%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* CLOSE BUTTON */
+.res-close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
 }

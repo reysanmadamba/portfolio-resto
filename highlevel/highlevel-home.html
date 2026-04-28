@@ -33,9 +33,15 @@
             <li><a href="#">Our Story</a></li>
             <li><a href="#">Private Events</a></li>
             <li><a href="#">Catering</a></li>
+            <li>
+                <a href="#" onclick="openReservationFromNav(event)">
+                    Reserve Online
+                </a>
+            </li>
         </ul>
 
-        <a class="nav-order-btn" href="#">Order Online</a>
+        <a class="nav-order-btn" href="https://order.toasttab.com/online/highlevel-diner-10912-88-ave-nw?source_id=3"
+            target="_blank">Order Online</a>
     </nav>
 
     <!-- 🔴 MOBILE OVERLAY MENU -->
@@ -49,9 +55,15 @@
             <li><a href="#">Our Story</a></li>
             <li><a href="#">Private Events</a></li>
             <li><a href="#">Catering</a></li>
+            <li>
+                <a href="#" onclick="openReservationFromNav(event)">
+                    Reserve Online
+                </a>
+            </li>
         </ul>
 
-        <a class="mobile-order-btn" href="#">Order Online</a>
+        <a class="mobile-order-btn" href="https://order.toasttab.com/online/highlevel-diner-10912-88-ave-nw?source_id=3"
+            target="_blank">Order Online</a>
     </div>
 
     <!-- HERO -->
@@ -62,12 +74,14 @@
 
     <!-- INTRO -->
     <div class="intro">
-        <h1>Highlevel Diner: Your Local Coffee<br />House &amp; Restaurant</h1>
-        <p class="address">10912 88 Ave NW, Edmonton, AB</p>
+        <h1>Honest, Local, Heartfelt Food.<br /></h1>
+        <p class="address year">since 1982</p>
         <div class="intro-divider"></div>
         <div class="cta-row">
             <a class="cta-btn cta-black" href="highlevel-menus.html">Our Menu</a>
-            <a class="cta-btn cta-red" href="#">Order Online</a>
+            <a class="cta-btn cta-red"
+                href="https://order.toasttab.com/online/highlevel-diner-10912-88-ave-nw?source_id=3"
+                target="_blank">Order Online</a>
         </div>
     </div>
 
@@ -100,14 +114,14 @@
     </div>
 
     <!-- RESERVATION -->
-    <div class="reservation-box">
+    <div id="reservationSection" class="reservation-box">
         <h3>Make a Reservation</h3>
         <div class="reservation-controls">
-            <input class="res-field" type="text" placeholder="&#128197;  Apr 27, 2026" />
-            <input class="res-field" type="text" placeholder="&#128336;  10:00 PM" />
-            <input class="res-field" type="text" placeholder="&#128100;  2 people" />
+            <input id="resDate" type="date" class="res-field" />
+            <input id="resTime" type="time" class="res-field" />
+            <input id="resPeople" type="number" class="res-field" min="1" value="2" />
         </div>
-        <button class="find-table-btn">Find a Table</button>
+        <button class="find-table-btn" onclick="openReservation()">Find a Table</button>
     </div>
 
     <!-- CULTURE -->
@@ -124,13 +138,13 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>10912 88 Ave NW, Edmonton, AB T6J 1P9</p>
-        <p>+1 (780) 433-0993 | highleveldiner@websitesite.com</p>
+        <p>10912 88 Ave NW, Edmonton, AB T6G 0Z1</p>
+        <p>+1 (780) 433-0993 | info@highleveldiner.com</p>
         <p>Monday to Saturday: 8am – 3pm | Sunday 9am – 3pm</p>
         <p><a href="#">Join our team</a></p>
         <p><a href="#">Links</a> &nbsp; <a href="#">Employee Portal</a></p>
         <div class="social-icons">
-            <a href="#"><i class="fa-solid fa-link"></i></a>
+            <!-- <a href="#"><i class="fa-solid fa-link"></i></a> -->
             <a href="https://www.instagram.com/highleveldiner/"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.facebook.com/highleveldineryeg"><i class="fa-brands fa-facebook-f"></i></a>
             <!-- <a href="#"><i class="fa-brands fa-tripadvisor"></i></a> -->
@@ -144,28 +158,168 @@
         </div>
         <p class="footer-fine">Opt in to receive news and updates.</p>
     </footer>
+
+
+
+
+
+    <!-- JS  -->
+    <!-- 
     <script>
-        const toggle = document.getElementById("navToggle");
-        const menu = document.getElementById("mobileMenu");
-        const closeBtn = document.getElementById("navClose");
+        document.addEventListener("DOMContentLoaded", () => {
 
-        // open
-        toggle.onclick = () => {
-            menu.classList.add("active");
-        };
+            // NAV
+            const toggle = document.getElementById("navToggle");
+            const menu = document.getElementById("mobileMenu");
+            const closeBtn = document.getElementById("navClose");
 
-        // close button
-        closeBtn.onclick = () => {
-            menu.classList.remove("active");
-        };
+            toggle.onclick = () => menu.classList.add("active");
+            closeBtn.onclick = () => menu.classList.remove("active");
 
-        // 🔥 FIX: close menu when ANY link is clicked
-        document.querySelectorAll(".mobile-menu a").forEach(link => {
-            link.addEventListener("click", () => {
-                menu.classList.remove("active");
+            document.querySelectorAll(".mobile-menu a").forEach(link => {
+                link.addEventListener("click", () => {
+                    menu.classList.remove("active");
+                });
             });
+
+            // MODAL
+            const modal = document.getElementById("reservationModal");
+            const frame = document.getElementById("toastFrame");
+            const fallback = document.getElementById("fallbackMsg");
+
+            // 🔥 OPEN RESERVATION (UPDATED)
+            window.openReservation = function () {
+                const date = document.getElementById("resDate").value;
+                const time = document.getElementById("resTime").value;
+                const people = document.getElementById("resPeople").value || 2;
+
+                if (!date || !time) {
+                    alert("Please select date and time");
+                    return;
+                }
+
+                // combine date + time
+                const dateTime = new Date(`${date}T${time}`);
+                const formatted = formatToToast(date, time);
+
+                const url = `https://tables.toasttab.com/restaurants/605ed5a7-f0de-4ccd-a5c0-31c514082741/reserve?partySize=${people}&dateTime=${formatted}`;
+
+                frame.src = url;
+                modal.style.display = "block";
+
+                // fallback check
+                setTimeout(() => {
+                    try {
+                        const test = frame.contentWindow.location.href;
+                    } catch (e) {
+                        fallback.style.display = "block";
+                    }
+                }, 1500);
+            };
+
+            // CLOSE MODAL
+            document.querySelector(".res-close").onclick = () => {
+                modal.style.display = "none";
+                frame.src = "";
+            };
+
+            //format time to MT
+            function formatToToast(date, time) {
+                const dt = new Date(`${date}T${time}`);
+
+                const year = dt.getFullYear();
+                const month = String(dt.getMonth() + 1).padStart(2, '0');
+                const day = String(dt.getDate()).padStart(2, '0');
+                const hours = String(dt.getHours()).padStart(2, '0');
+                const minutes = String(dt.getMinutes()).padStart(2, '0');
+
+                // get timezone offset (e.g. -06:00)
+                const offset = -dt.getTimezoneOffset();
+                const sign = offset >= 0 ? "+" : "-";
+                const offsetHours = String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0');
+                const offsetMinutes = String(Math.abs(offset) % 60).padStart(2, '0');
+
+                return `${year}-${month}-${day}T${hours}:${minutes}:00.000${sign}${offsetHours}:${offsetMinutes}`;
+            }
+
+            // DEFAULT VALUES
+            const today = new Date();
+
+            // set date (YYYY-MM-DD)
+            document.getElementById("resDate").value = today.toISOString().split("T")[0];
+
+            // set default time (e.g. 09:00)
+            document.getElementById("resTime").value = "09:00";
+
+            // set default people
+            document.getElementById("resPeople").value = 2;
+
+            // CLICK OUTSIDE CLOSE
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    frame.src = "";
+                }
+            };
+
+            // nav pop out modal 
+            window.openReservationFromNav = function (e) {
+                e.preventDefault();
+
+                // OPTIONAL: auto-fill date/time so no alert
+                const today = new Date();
+                document.getElementById("resDate").value = today.toISOString().split("T")[0];
+                document.getElementById("resTime").value = "09:00";
+                document.getElementById("resPeople").value = 2;
+
+                // open modal
+                openReservation();
+            };
+
+            // FALLBACK BUTTON
+            window.openToastDirect = function () {
+                window.open(frame.src, "_blank");
+            };
+
+            window.goToReservation = function (e) {
+                e.preventDefault();
+
+                const section = document.getElementById("reservationSection");
+
+                const today = new Date();
+                document.getElementById("resDate").value = today.toISOString().split("T")[0];
+                document.getElementById("resTime").value = "09:00";
+
+                // smooth scroll
+                section.scrollIntoView({ behavior: "smooth" });
+
+                // open modal after scroll
+                setTimeout(() => {
+                    openReservation();
+                }, 500);
+            };
+
         });
-    </script>
+    </script> -->
+
+
+    <!-- RESERVATION MODAL -->
+    <div id="reservationModal" class="res-modal">
+        <div class="res-modal-content">
+            <span class="res-close">&times;</span>
+
+            <iframe id="toastFrame" src="" width="100%" height="600px" style="border:none;">
+            </iframe>
+
+            <!-- fallback message -->
+            <div id="fallbackMsg" style="display:none; text-align:center; padding:20px;">
+                <p>Unable to load reservation here.</p>
+                <button onclick="openToastDirect()">Open Reservation Page</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 
 </html>

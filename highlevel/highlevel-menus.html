@@ -33,9 +33,15 @@
             <li><a href="#">Our Story</a></li>
             <li><a href="#">Private Events</a></li>
             <li><a href="#">Catering</a></li>
+            <li>
+                <a href="#" onclick="openReservationFromNav(event)">
+                    Reserve Online
+                </a>
+            </li>
         </ul>
 
-        <a class="nav-order-btn" href="#">Order Online</a>
+        <a class="nav-order-btn" href="https://order.toasttab.com/online/highlevel-diner-10912-88-ave-nw?source_id=3"
+            target="_blank">Order Online</a>
     </nav>
 
     <!-- 🔴 MOBILE OVERLAY MENU -->
@@ -49,9 +55,15 @@
             <li><a href="#">Our Story</a></li>
             <li><a href="#">Private Events</a></li>
             <li><a href="#">Catering</a></li>
+            <li>
+                <a href="#" onclick="openReservationFromNav(event)">
+                    Reserve Online
+                </a>
+            </li>
         </ul>
 
-        <a class="mobile-order-btn" href="#">Order Online</a>
+        <a class="mobile-order-btn" href="https://order.toasttab.com/online/highlevel-diner-10912-88-ave-nw?source_id=3"
+            target="_blank">Order Online</a>
     </div>
 
     <!-- MENUS HERO -->
@@ -447,12 +459,12 @@
     <!-- FOOTER -->
     <footer>
         <p>10912 88 Ave NW, Edmonton, AB T6J 1P9</p>
-        <p>+1 (780) 433-0993 | highleveldiner@websitesite.com</p>
+        <p>+1 (780) 433-0993 | info@highleveldiner.com</p>
         <p>Monday to Saturday: 8am – 3pm | Sunday 9am – 3pm</p>
         <p><a href="#">Join our team</a></p>
         <p><a href="#">Links</a> &nbsp; <a href="#">Employee Portal</a></p>
         <div class="social-icons">
-            <a href="#"><i class="fa-solid fa-link"></i></a>
+            <!-- <a href="#"><i class="fa-solid fa-link"></i></a> -->
             <a href="https://www.instagram.com/highleveldiner/"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.facebook.com/highleveldineryeg"><i class="fa-brands fa-facebook-f"></i></a>
             <!-- <a href="#"><i class="fa-brands fa-tripadvisor"></i></a> -->
@@ -467,28 +479,75 @@
         <p class="footer-fine">Opt in to receive news and updates.</p>
     </footer>
 
-    <script>
-        const toggle = document.getElementById("navToggle");
-        const menu = document.getElementById("mobileMenu");
-        const closeBtn = document.getElementById("navClose");
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", () => {
 
-        // open
-        toggle.onclick = () => {
-            menu.classList.add("active");
-        };
+            // NAV
+            const toggle = document.getElementById("navToggle");
+            const menu = document.getElementById("mobileMenu");
+            const closeBtn = document.getElementById("navClose");
 
-        // close button
-        closeBtn.onclick = () => {
-            menu.classList.remove("active");
-        };
+            toggle.onclick = () => menu.classList.add("active");
+            closeBtn.onclick = () => menu.classList.remove("active");
 
-        // 🔥 FIX: close menu when ANY link is clicked
-        document.querySelectorAll(".mobile-menu a").forEach(link => {
-            link.addEventListener("click", () => {
-                menu.classList.remove("active");
+            document.querySelectorAll(".mobile-menu a").forEach(link => {
+                link.addEventListener("click", () => {
+                    menu.classList.remove("active");
+                });
             });
+
+            // MODAL
+            const modal = document.getElementById("reservationModal");
+            const frame = document.getElementById("toastFrame");
+            const fallback = document.getElementById("fallbackMsg");
+
+            // OPEN FROM NAV
+            window.openReservationFromNav = function (e) {
+                e.preventDefault();
+
+                const today = new Date();
+                const formatted = today.toISOString();
+
+                const url = `https://tables.toasttab.com/restaurants/605ed5a7-f0de-4ccd-a5c0-31c514082741/reserve?partySize=2&dateTime=${formatted}`;
+
+                frame.src = url;
+                modal.style.display = "block";
+            };
+
+            // CLOSE
+            document.querySelector(".res-close").onclick = () => {
+                modal.style.display = "none";
+                frame.src = "";
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    frame.src = "";
+                }
+            };
+
+            window.openToastDirect = function () {
+                window.open(frame.src, "_blank");
+            };
+
         });
-    </script>
+    </script> -->
+
+    <div id="reservationModal" class="res-modal">
+        <div class="res-modal-content">
+            <span class="res-close">&times;</span>
+
+            <iframe id="toastFrame" src="" width="100%" height="600px" style="border:none;"></iframe>
+
+            <div id="fallbackMsg" style="display:none; text-align:center; padding:20px;">
+                <p>Unable to load reservation here.</p>
+                <button onclick="openToastDirect()">Open Reservation Page</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 
 </html>
