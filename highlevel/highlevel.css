@@ -1,5 +1,7 @@
 /* ══════════════════════════════════════════
-   cafecito.css — Shared styles for all pages
+   highlevel.css — Retro Diner Theme
+   Brand Colors: Royal Blue · Coral Red · Gold
+   Highlevel Diner · Edmonton, AB · Est. 1982
    ══════════════════════════════════════════ */
 
 *,
@@ -11,50 +13,92 @@
 }
 
 :root {
-    --red: #c0392b;
-    --black: #111111;
+    /* ── Core Brand Palette ── */
+    --blue: #1a4fd6;
+    /* royal blue — main background */
+    --blue-dark: #1038a8;
+    /* nav, footer, darker sections */
+    --blue-mid: #1c58e8;
+    /* slightly lighter panels */
+    --red: #e8453c;
+    /* coral red — accents & logo */
+    --yellow: #f5c842;
+    /* gold yellow — highlights & borders */
     --white: #ffffff;
-    --light-gray: #f4f4f4;
-    --mid-gray: #e0e0e0;
-    --dark-gray: #2a2a2a;
-    --text-dark: #222222;
-    --text-muted: #777777;
+    /* text */
+    --white-dim: rgba(255, 255, 255, 0.75);
+    /* secondary text */
+    --white-faint: rgba(255, 255, 255, 0.4);
+    /* muted text */
+
+    /* ── Semantic aliases ── */
+    --black: var(--blue-dark);
+    --light-gray: var(--blue-mid);
+    --mid-gray: rgba(255, 255, 255, 0.15);
+    --dark-gray: var(--blue-dark);
+    --text-dark: var(--white);
+    --text-muted: var(--white-dim);
+
+    /* ── Typography ── */
     --font-main: 'Montserrat', sans-serif;
     --font-serif: 'Playfair Display', serif;
 }
 
-body {
-    font-family: var(--font-main);
-    color: var(--text-dark);
-    background: var(--white);
+/* ── Film grain — vintage print feel ── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ── NAV ── */
+body {
+    font-family: var(--font-main);
+    color: var(--white);
+    background: var(--blue);
+}
+
+/* ══════════════════════════════════════════
+   NAV
+   ══════════════════════════════════════════ */
 nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--white);
-    border-bottom: 1px solid var(--mid-gray);
+    background: var(--blue-dark);
+    border-bottom: 3px solid var(--yellow);
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 20px;
-    min-height: 56px;
-
+    min-height: 60px;
     flex-wrap: wrap;
-
 }
 
+/* Logo — coral red italic with yellow outline shadow */
 .nav-logo {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
     color: var(--red);
     text-decoration: none;
     letter-spacing: 0.02em;
+    text-shadow:
+        1px 1px 0 var(--yellow),
+        -1px -1px 0 var(--yellow),
+        1px -1px 0 var(--yellow),
+        -1px 1px 0 var(--yellow);
+    transition: color 0.2s;
+}
+
+.nav-logo:hover {
+    color: var(--yellow);
+    text-shadow: none;
 }
 
 .nav-links {
@@ -64,75 +108,85 @@ nav {
 }
 
 .nav-links li a {
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--text-dark);
+    color: var(--white);
     text-decoration: none;
-
-    padding-bottom: 4px;
-
+    padding-bottom: 3px;
     border-bottom: 1.5px solid transparent;
-    /* invisible by default */
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s, color 0.2s;
 }
 
-/* show underline on hover */
-.nav-links li a:hover {
-    border-bottom-color: var(--text-dark);
-}
-
-/* keep underline ONLY on active page */
+.nav-links li a:hover,
 .nav-links li a.active {
-    border-bottom-color: var(--text-dark);
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
 }
 
 .nav-order-btn {
-    font-size: 0.55rem;
-
+    font-size: 0.58rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--red);
-    border: 1.5px solid var(--red);
-    padding: 6px 10px;
-
+    color: var(--yellow);
+    border: 1.5px solid var(--yellow);
+    padding: 7px 14px;
     text-decoration: none;
     transition: background 0.2s, color 0.2s;
 }
 
 .nav-order-btn:hover {
-    background: var(--red);
-    color: var(--white);
+    background: var(--yellow);
+    color: var(--blue-dark);
 }
 
-/* ── FOOTER ── */
+/* ══════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════ */
 footer {
-    background: var(--light-gray);
+    background: var(--blue-dark);
+    border-top: 3px solid var(--yellow);
     text-align: center;
     padding: 30px 24px 0;
     font-size: 0.65rem;
-    color: var(--text-muted);
+    color: var(--white-dim);
     line-height: 2.2;
 }
 
 footer a {
-    color: var(--text-muted);
+    color: var(--white-dim);
     text-decoration: underline;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: var(--yellow);
 }
 
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 18px;
     margin: 12px 0 18px;
+}
+
+.social-icons a {
+    font-size: 18px;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.social-icons a:hover {
+    color: var(--yellow);
 }
 
 .social-icon {
     width: 22px;
     height: 22px;
-    background: #aaa;
+    background: var(--blue-mid);
     border-radius: 50%;
     display: inline-block;
 }
@@ -140,7 +194,8 @@ footer a {
 .footer-divider {
     width: 100%;
     height: 1px;
-    background: var(--mid-gray);
+    background: rgba(255, 255, 255, 0.12);
+    margin-top: 8px;
 }
 
 .footer-subscribe {
@@ -152,15 +207,21 @@ footer a {
 }
 
 .footer-subscribe input {
-    border: 1px solid #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
     padding: 8px 12px;
     font-size: 0.68rem;
     font-family: var(--font-main);
     width: 130px;
 }
 
+.footer-subscribe input::placeholder {
+    color: var(--white-faint);
+}
+
 .subscribe-btn {
-    background: var(--black);
+    background: var(--red);
     color: var(--white);
     border: none;
     padding: 9px 18px;
@@ -170,64 +231,49 @@ footer a {
     text-transform: uppercase;
     cursor: pointer;
     font-family: var(--font-main);
+    transition: background 0.2s, color 0.2s;
+}
+
+.subscribe-btn:hover {
+    background: var(--yellow);
+    color: var(--blue-dark);
 }
 
 .footer-fine {
     font-size: 0.58rem;
-    color: #bbb;
+    color: var(--white-faint);
     padding-bottom: 14px;
 }
 
-/* ── SHARED UTILITIES ── */
+/* ══════════════════════════════════════════
+   SHARED UTILITIES
+   ══════════════════════════════════════════ */
 .divider {
     width: 100%;
     height: 1px;
-    background: var(--mid-gray);
+    background: rgba(255, 255, 255, 0.15);
     max-width: 600px;
     margin: 0 auto;
 }
 
-/* 
-@media (max-width: 1100px) {
-
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px;
-    }
-
-    .nav-links {
-        display: flex;
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-        gap: 14px;
-        width: 100%;
-        margin-top: 6px;
-    }
-
-    .nav-links li a {
-        font-size: 0.6rem;
-    }
-
-    .nav-order-btn {
-        order: 3;
-
-        margin-top: 8px;
-    }
-} */
-
 /* ══════════════════════════════════════════
-   HOME PAGE STYLES
+   HOME — HERO
    ══════════════════════════════════════════ */
-
-/* Hero */
 .hero {
     width: 100%;
     height: 340px;
     overflow: hidden;
     position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(16, 56, 168, 0.3) 0%, rgba(16, 56, 168, 0.6) 100%),
+        radial-gradient(ellipse at center, transparent 40%, rgba(10, 30, 100, 0.55) 100%);
+    pointer-events: none;
 }
 
 .hero img {
@@ -236,12 +282,13 @@ footer a {
     object-fit: cover;
     object-position: center 12%;
     display: block;
+    filter: contrast(1.1) brightness(0.78) saturate(0.85);
 }
 
 .hero-placeholder {
     width: 100%;
     height: 100%;
-    background: #b5b0ab;
+    background: var(--blue-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -252,44 +299,44 @@ footer a {
     font-style: italic;
     font-size: 4rem;
     color: var(--red);
-    opacity: 0.6;
+    opacity: 0.7;
     letter-spacing: 0.04em;
+    text-shadow: 2px 2px 0 var(--yellow);
 }
 
-/* Intro */
+/* ── INTRO ── */
 .intro {
     text-align: center;
-    padding: 40px 24px 20px;
+    padding: 44px 24px 20px;
+    background: var(--blue);
 }
 
 .intro h1 {
     font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--yellow);
     line-height: 1.7;
     margin-bottom: 10px;
 }
 
 .intro .address {
     font-size: 0.72rem;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-    margin-bottom: 22px;
-
+    color: var(--white-dim);
     letter-spacing: 1em;
     text-align: center;
+    margin-bottom: 22px;
 }
 
 .intro-divider {
     width: 40px;
-    height: 1px;
-    background: var(--black);
+    height: 2px;
+    background: var(--red);
     margin: 0 auto 22px;
 }
 
-/* CTA Buttons */
+/* ── CTA BUTTONS ── */
 .cta-row {
     display: flex;
     max-width: 420px;
@@ -308,11 +355,17 @@ footer a {
     text-decoration: none;
     text-align: center;
     display: block;
+    transition: filter 0.2s;
+}
+
+.cta-btn:hover {
+    filter: brightness(1.12);
 }
 
 .cta-black {
-    background: var(--black);
+    background: var(--blue-dark);
     color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .cta-red {
@@ -320,10 +373,11 @@ footer a {
     color: var(--white);
 }
 
-/* Hours */
+/* ── HOURS ── */
 .hours {
     text-align: center;
     padding: 18px 24px 28px;
+    background: var(--blue);
 }
 
 .hours p {
@@ -332,23 +386,19 @@ footer a {
     letter-spacing: 0.18em;
     text-transform: uppercase;
     line-height: 2;
-    color: var(--text-dark);
+    color: var(--white);
 }
 
-/* Photo Grid */
-
+/* ── PHOTO GRID ── */
 .photo-grid {
     max-width: 900px;
-
-    margin: 32px auto;
+    margin: 0 auto 0;
     padding: 0 16px;
-
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 4px;
 }
 
-/* Top images */
 .photo-grid .top-left {
     grid-column: 1;
 }
@@ -357,23 +407,26 @@ footer a {
     grid-column: 2;
 }
 
-/* Bottom row (3 images) */
 .photo-grid .bottom-row {
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 4px;
 }
-
 
 .photo-grid img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: contrast(1.1) brightness(0.78) saturate(0.85);
+    transition: filter 0.4s ease;
 }
 
-/* Control heights to match design */
+.photo-grid img:hover {
+    filter: contrast(1.05) brightness(0.92) saturate(1.0);
+}
+
 .top-left img,
 .top-right img {
     height: 320px;
@@ -384,14 +437,14 @@ footer a {
 }
 
 .photo-placeholder {
-    background: #ccc9c5;
+    background: var(--blue-dark);
     width: 100%;
     aspect-ratio: 4/3;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.65rem;
-    color: #888;
+    color: var(--white-faint);
     letter-spacing: 0.1em;
     text-transform: uppercase;
 }
@@ -404,20 +457,23 @@ footer a {
     aspect-ratio: 1;
 }
 
-/* Reservation */
+/* ── RESERVATION ── */
 .reservation-box {
-    background: var(--light-gray);
+    background: var(--blue-dark);
+    border-top: 2px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.12);
     padding: 30px 16px;
     text-align: center;
-    margin: 0 0 40px;
+    margin: 32px 0 0;
 }
 
 .reservation-box h3 {
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     margin-bottom: 18px;
+    color: var(--yellow);
 }
 
 .reservation-controls {
@@ -429,33 +485,21 @@ footer a {
 }
 
 .res-field {
-    border: 1px solid #ccc;
-    background: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
     padding: 9px 14px;
     font-size: 0.72rem;
     font-family: var(--font-main);
-    color: var(--text-dark);
     min-width: 130px;
 }
 
-/* TABLET */
-@media (max-width: 900px) {
-    .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* MOBILE */
-@media (max-width: 480px) {
-    .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* still 2 */
-        gap: 30px 20px;
-    }
+.res-field:focus {
+    outline: 1px solid var(--yellow);
 }
 
 .find-table-btn {
-    background: var(--black);
+    background: var(--red);
     color: var(--white);
     border: none;
     padding: 11px 28px;
@@ -465,12 +509,19 @@ footer a {
     text-transform: uppercase;
     cursor: pointer;
     font-family: var(--font-main);
+    transition: background 0.2s, color 0.2s;
 }
 
-/* Culture Section */
+.find-table-btn:hover {
+    background: var(--yellow);
+    color: var(--blue-dark);
+}
+
+/* ── CULTURE SECTION ── */
 .culture-section {
     text-align: center;
-    padding: 10px 24px 0;
+    padding: 40px 24px 0;
+    background: var(--blue);
 }
 
 .culture-img {
@@ -478,12 +529,10 @@ footer a {
     max-width: 700px;
     height: 400px;
     object-fit: cover;
-
     object-position: center;
-    /* 👈 true center */
-
     display: block;
     margin: 0 auto 20px;
+    filter: contrast(1.1) brightness(0.78) saturate(0.85);
 }
 
 .culture-section h2 {
@@ -492,25 +541,26 @@ footer a {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin-bottom: 20px;
+    color: var(--yellow);
 }
 
 .culture-img-placeholder {
     max-width: 520px;
     margin: 0 auto 18px;
-    background: #ccc9c5;
+    background: var(--blue-dark);
     height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.65rem;
-    color: #888;
+    color: var(--white-faint);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
 
 .culture-caption {
     font-size: 0.65rem;
-    color: var(--text-muted);
+    color: var(--white-dim);
     max-width: 520px;
     margin: 0 auto 24px;
     line-height: 1.8;
@@ -518,7 +568,8 @@ footer a {
 
 .learn-more-btn {
     display: inline-block;
-    border: 1px solid #aaa;
+    border: 1.5px solid var(--yellow);
+    color: var(--yellow);
     padding: 11px 30px;
     font-size: 0.66rem;
     font-weight: 600;
@@ -528,15 +579,21 @@ footer a {
     background: none;
     font-family: var(--font-main);
     margin-bottom: 48px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.learn-more-btn:hover {
+    background: var(--yellow);
+    color: var(--blue-dark);
 }
 
 /* ══════════════════════════════════════════
-   MENUS PAGE STYLES
+   MENUS PAGE
    ══════════════════════════════════════════ */
-
 .menus-hero {
     text-align: center;
     padding: 40px 24px 10px;
+    background: var(--blue);
 }
 
 .menus-hero h1 {
@@ -544,14 +601,14 @@ footer a {
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--red);
+    color: var(--yellow);
     line-height: 1.7;
     margin-bottom: 12px;
 }
 
 .menus-hero p {
     font-size: 0.68rem;
-    color: var(--text-muted);
+    color: var(--white-dim);
     line-height: 2;
     letter-spacing: 0.04em;
 }
@@ -559,29 +616,30 @@ footer a {
 .menus-hero-divider {
     width: 100%;
     max-width: 600px;
-    height: 1px;
-    background: var(--mid-gray);
+    height: 2px;
+    background: var(--red);
     margin: 24px auto 0;
 }
 
 .menus-img-placeholder {
     max-width: 520px;
     margin: 28px auto;
-    background: #ccc9c5;
+    background: var(--blue-dark);
     height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.65rem;
-    color: #888;
+    color: var(--white-faint);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
 
-/* Supporting Local */
+/* ── Supporting Local ── */
 .supporting-local {
     text-align: center;
     padding: 10px 24px 24px;
+    background: var(--blue);
 }
 
 .supporting-local h3 {
@@ -590,18 +648,19 @@ footer a {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin-bottom: 10px;
+    color: var(--white);
 }
 
 .supporting-local p {
     font-size: 0.65rem;
-    color: var(--text-muted);
+    color: var(--white-dim);
     line-height: 1.9;
     max-width: 560px;
     margin: 0 auto;
 }
 
 .supporting-local p strong {
-    color: var(--text-dark);
+    color: var(--white);
     font-weight: 600;
 }
 
@@ -609,21 +668,22 @@ footer a {
     width: 100%;
     max-width: 600px;
     height: 1px;
-    background: var(--mid-gray);
+    background: rgba(255, 255, 255, 0.15);
     margin: 22px auto 0;
 }
 
-/* Menu Sections */
-body {
-    background: var(--white);
-}
-
+/* ── Menu Sections ── */
 .menu-section {
     max-width: 1100px;
     margin: 0 auto;
     padding: 40px 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--blue);
+}
 
-    border-bottom: 1px solid var(--mid-gray);
+/* Alternate rows slightly darker for visual rhythm */
+.menu-section:nth-child(even) {
+    background: var(--blue-dark);
 }
 
 .menu-section-title {
@@ -633,12 +693,13 @@ body {
     letter-spacing: 0.22em;
     text-transform: uppercase;
     margin-bottom: 4px;
+    color: var(--yellow);
 }
 
 .menu-section-sub {
     text-align: center;
     font-size: 0.6rem;
-    color: var(--text-muted);
+    color: var(--white-dim);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 22px;
@@ -647,12 +708,8 @@ body {
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* desktop */
     gap: 60px 100px;
 }
-
-
-
 
 .menu-item {
     text-align: left;
@@ -664,7 +721,6 @@ body {
     align-items: baseline;
     gap: 8px;
     margin-bottom: 6px;
-
     flex-wrap: nowrap;
 }
 
@@ -673,33 +729,33 @@ body {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text-dark);
+    color: var(--white);
     flex: 1;
 }
 
 .menu-item-price {
     font-size: 0.65rem;
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--yellow);
     white-space: nowrap;
     flex-shrink: 0;
 }
 
 .menu-item-desc {
     font-size: 0.6rem;
-    color: var(--text-muted);
+    color: var(--white-dim);
     line-height: 1.8;
-
     text-transform: lowercase;
 }
 
-/* Empanada Flights */
+/* ── Empanada Flights ── */
 .empanada-flights {
     max-width: 700px;
     margin: 0 auto;
-    padding: 24px 24px;
+    padding: 24px;
     text-align: center;
-    border-bottom: 1px solid var(--mid-gray);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--blue);
 }
 
 .empanada-flights h4 {
@@ -708,11 +764,12 @@ body {
     letter-spacing: 0.22em;
     text-transform: uppercase;
     margin-bottom: 6px;
+    color: var(--yellow);
 }
 
 .empanada-flights .sub {
     font-size: 0.6rem;
-    color: var(--text-muted);
+    color: var(--white-dim);
     letter-spacing: 0.08em;
     margin-bottom: 18px;
 }
@@ -723,30 +780,7 @@ body {
     gap: 60px;
 }
 
-
-/* footer social  */
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    margin: 12px 0 18px;
-}
-
-.social-icons a {
-    font-size: 18px;
-    color: #333;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-}
-
-.social-icons a:hover {
-    opacity: 0.6;
-}
-
-
-
-/* ── MENUS HERO IMAGE (Page 2) ── */
-/* Default (MOBILE FIRST) */
+/* ── Menus Hero Image ── */
 .menus-hero-img {
     width: 100%;
     height: 50vh;
@@ -759,31 +793,455 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
     object-position: center;
+    filter: contrast(1.1) brightness(0.78) saturate(0.85);
 }
 
-
-/* DESKTOP */
 @media (min-width: 1024px) {
     .menus-hero-img {
         height: auto;
-
         max-height: none;
     }
 
     .menus-hero-img img {
         height: auto;
         object-fit: contain;
-
     }
 }
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════════════════
+   FIND US PAGE
+   ══════════════════════════════════════════ */
+.findus-hero {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    position: relative;
+}
+
+.findus-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(16, 56, 168, 0.3) 0%, rgba(16, 56, 168, 0.6) 100%);
+    pointer-events: none;
+}
+
+.findus-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    filter: contrast(1.1) brightness(0.78) saturate(0.85);
+}
+
+.findus-hero-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--blue-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--white-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.findus-header {
+    text-align: center;
+    padding: 52px 24px 8px;
+    background: var(--blue);
+}
+
+.findus-header h1 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1.8;
+}
+
+.findus-directions {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    text-align: center;
+    background: var(--blue);
+}
+
+.findus-directions h2 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 32px;
+}
+
+.direction-block {
+    margin-bottom: 28px;
+}
+
+.direction-block h3 {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+}
+
+.direction-block p {
+    font-size: 0.72rem;
+    color: var(--white-dim);
+    line-height: 1.9;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+/* ── Info Panel ── */
+.findus-info-panel {
+    background: var(--blue-dark);
+    border-top: 3px solid var(--yellow);
+    border-bottom: 3px solid var(--yellow);
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    padding: 48px 40px;
+}
+
+.info-col h4 {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.info-col p {
+    font-size: 0.68rem;
+    color: var(--white-dim);
+    line-height: 2;
+    text-align: center;
+}
+
+.info-col a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 0.68rem;
+    line-height: 2;
+    display: block;
+    text-align: center;
+    transition: color 0.2s;
+}
+
+.info-col a:hover {
+    color: var(--yellow);
+}
+
+.hours-table {
+    border-collapse: collapse;
+    font-size: 0.66rem;
+    color: var(--white-dim);
+    margin: 0 auto;
+}
+
+.hours-table td {
+    padding: 3px 14px;
+    line-height: 1.9;
+}
+
+.hours-table td:first-child {
+    text-align: right;
+    color: var(--yellow);
+    font-weight: 600;
+}
+
+.hours-table td:last-child {
+    text-align: left;
+}
+
+/* ── Map Section ── */
+.findus-map-section {
+    padding: 40px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--blue);
+}
+
+.map-row {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 16px;
+    height: 280px;
+}
+
+.map-context-placeholder {
+    background: var(--blue-dark);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    color: var(--white-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.map-context-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.1) brightness(0.78) saturate(0.85);
+}
+
+.map-embed {
+    height: 100%;
+    overflow: hidden;
+}
+
+.map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* ── Find Us Online ── */
+.findus-online {
+    text-align: center;
+    padding: 36px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--blue-dark);
+}
+
+.findus-online h3 {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 16px;
+}
+
+.findus-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.findus-social a {
+    font-size: 20px;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.findus-social a:hover {
+    color: var(--yellow);
+}
+
+/* ── Navigation Video ── */
+.findus-nav-video {
+    text-align: center;
+    padding: 40px 24px 52px;
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--blue);
+}
+
+.findus-nav-video h3 {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 20px;
+}
+
+.video-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.video-placeholder {
+    width: 100%;
+    background: var(--blue-dark);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-faint);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    aspect-ratio: 16/9;
+}
+
+/* ══════════════════════════════════════════
+   MODAL
+   ══════════════════════════════════════════ */
+.res-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 80, 0.88);
+}
+
+.res-modal-content {
+    position: relative;
+    margin: 5% auto;
+    width: 90%;
+    max-width: 900px;
+    background: var(--blue);
+    border: 2px solid var(--yellow);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.res-close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--white);
+}
+
+/* ══════════════════════════════════════════
+   HAMBURGER / MOBILE MENU
+   ══════════════════════════════════════════ */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 22px;
+    height: 2px;
+    background: var(--white);
+    display: block;
+}
+
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--blue-dark);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.mobile-menu ul {
+    list-style: none;
+    text-align: center;
+}
+
+.mobile-menu ul li {
+    margin: 18px 0;
+}
+
+.mobile-menu ul li a {
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--white);
+    font-family: var(--font-serif);
+    font-style: italic;
+    transition: color 0.2s;
+}
+
+.mobile-menu ul li a:hover {
+    color: var(--yellow);
+}
+
+.mobile-order-btn {
+    margin-top: 40px;
+    border: 1.5px solid var(--yellow);
+    color: var(--yellow);
+    padding: 12px 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.7rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.mobile-order-btn:hover {
+    background: var(--yellow);
+    color: var(--blue-dark);
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 1100px) {
+
+    .nav-links,
+    .nav-order-btn {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    nav {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 900px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
-
         gap: 40px 40px;
     }
 
@@ -804,8 +1262,6 @@ body {
         padding: 28px 20px;
     }
 
-
-
     .menu-item-name {
         font-size: 0.62rem;
     }
@@ -822,433 +1278,6 @@ body {
         flex-direction: column;
         gap: 16px;
     }
-}
-
-@media (max-width: 480px) {
-    .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 30px 24px;
-
-    }
-
-    .menu-section {
-        padding: 24px 16px;
-    }
-
-    .menu-item-name {
-        font-size: 0.6rem;
-    }
-
-    .menu-item-desc {
-        font-size: 0.55rem;
-        line-height: 1.6;
-    }
-}
-
-
-/* 🔥 HAMBURGER */
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    cursor: pointer;
-}
-
-.nav-toggle span {
-    width: 22px;
-    height: 2px;
-    background: #111;
-    display: block;
-}
-
-/* 🔴 MOBILE MENU OVERLAY */
-.mobile-menu {
-    position: fixed;
-    inset: 0;
-    background: #f7f7f7;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
-}
-
-.mobile-menu.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* CLOSE BUTTON */
-.mobile-close {
-    position: absolute;
-    top: 20px;
-    right: 24px;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-/* MENU LINKS */
-.mobile-menu ul {
-    list-style: none;
-    text-align: center;
-}
-
-.mobile-menu ul li {
-    margin: 18px 0;
-}
-
-.mobile-menu ul li a {
-    font-size: 1.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #111;
-}
-
-/* ORDER BUTTON */
-.mobile-order-btn {
-    margin-top: 40px;
-    border: 1px solid #111;
-    padding: 12px 28px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    text-decoration: none;
-    color: #111;
-}
-
-/*  MOBILE BREAKPOINT */
-@media (max-width: 1100px) {
-
-    .nav-links,
-    .nav-order-btn {
-        display: none;
-    }
-
-    .nav-toggle {
-        display: flex;
-    }
-
-    nav {
-        justify-content: space-between;
-    }
-}
-
-
-/* MODAL BACKGROUND */
-.res-modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-}
-
-/* MODAL CONTENT */
-.res-modal-content {
-    position: relative;
-    margin: 5% auto;
-    width: 90%;
-    max-width: 900px;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-/* CLOSE BUTTON */
-.res-close {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-
-
-/* ══════════════════════════════════════════
-   highlevel-findus.css — Find Us page styles
-   ══════════════════════════════════════════ */
-
-/* ── HERO ── */
-.findus-hero {
-    width: 100%;
-    height: 380px;
-    overflow: hidden;
-}
-
-.findus-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    display: block;
-}
-
-.findus-hero-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #ccc9c5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    color: #888;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-/* ── DIRECTIONS HEADER ── */
-.findus-header {
-    text-align: center;
-    padding: 52px 24px 8px;
-}
-
-.findus-header h1 {
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dark);
-    line-height: 1.8;
-}
-
-/* ── DIRECTIONS BODY ── */
-.findus-directions {
-    max-width: 620px;
-    margin: 0 auto;
-    padding: 32px 24px 48px;
-    text-align: center;
-}
-
-.findus-directions h2 {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dark);
-    margin-bottom: 32px;
-}
-
-.direction-block {
-    margin-bottom: 28px;
-}
-
-.direction-block h3 {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-dark);
-    margin-bottom: 8px;
-}
-
-.direction-block p {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    line-height: 1.9;
-    max-width: 520px;
-    margin: 0 auto;
-}
-
-/* ── INFO PANEL ── */
-.findus-info-panel {
-    background: var(--light-gray);
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    padding: 48px 40px;
-    border-top: 1px solid var(--mid-gray);
-    border-bottom: 1px solid var(--mid-gray);
-}
-
-.info-col h4 {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dark);
-    margin-bottom: 14px;
-    text-align: center;
-}
-
-.info-col p {
-    font-size: 0.68rem;
-    color: var(--text-muted);
-    line-height: 2;
-    text-align: center;
-}
-
-.info-col a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.68rem;
-    line-height: 2;
-    display: block;
-    text-align: center;
-    transition: color 0.2s;
-}
-
-.info-col a:hover {
-    color: var(--text-dark);
-}
-
-/* Hours table */
-.hours-table {
-    border-collapse: collapse;
-    font-size: 0.66rem;
-    color: var(--text-muted);
-    margin: 0 auto;
-}
-
-.hours-table td {
-    padding: 3px 14px;
-    line-height: 1.9;
-}
-
-.hours-table td:first-child {
-    text-align: right;
-    color: var(--text-dark);
-    font-weight: 500;
-}
-
-.hours-table td:last-child {
-    text-align: left;
-}
-
-/* ── MAP SECTION ── */
-.findus-map-section {
-    padding: 40px 24px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.map-row {
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 16px;
-    height: 280px;
-}
-
-.map-context-placeholder {
-    background: #ddd;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.62rem;
-    color: #999;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.map-context-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.map-embed {
-    height: 100%;
-    overflow: hidden;
-}
-
-.map-embed iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-}
-
-/* ── FIND US ONLINE ── */
-.findus-online {
-    text-align: center;
-    padding: 36px 24px;
-    border-top: 1px solid var(--mid-gray);
-    border-bottom: 1px solid var(--mid-gray);
-}
-
-.findus-online h3 {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dark);
-    margin-bottom: 16px;
-}
-
-.findus-social {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.findus-social a {
-    font-size: 20px;
-    color: var(--text-dark);
-    text-decoration: none;
-    transition: opacity 0.2s;
-}
-
-.findus-social a:hover {
-    opacity: 0.5;
-}
-
-/* ── NAVIGATION VIDEO ── */
-.findus-nav-video {
-    text-align: center;
-    padding: 40px 24px 52px;
-    max-width: 680px;
-    margin: 0 auto;
-}
-
-.findus-nav-video h3 {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dark);
-    margin-bottom: 20px;
-}
-
-.video-wrapper {
-    width: 100%;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    position: relative;
-}
-
-.video-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-}
-
-.video-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #222;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    aspect-ratio: 16/9;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
 
     .findus-hero {
         height: 240px;
@@ -1279,5 +1308,25 @@ body {
 
     .findus-nav-video {
         padding: 32px 16px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 24px;
+    }
+
+    .menu-section {
+        padding: 24px 16px;
+    }
+
+    .menu-item-name {
+        font-size: 0.6rem;
+    }
+
+    .menu-item-desc {
+        font-size: 0.55rem;
+        line-height: 1.6;
     }
 }
