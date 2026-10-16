@@ -1439,82 +1439,121 @@ footer a:hover {
     background: rgba(255, 255, 255, 0.92);
 }
 
+/* ── Happy Hour: matches the printed drinks menu panel ── */
 .happy-hour {
+    --hh-navy: #1d2050;
+    --hh-ink: #1a1a2e;
+    --hh-orange: #f7901e;
+    --hh-red: #d7262f;
     background: var(--blue-dark);
     border-top: 3px solid var(--yellow);
     border-bottom: 3px solid var(--yellow);
+    padding: 48px 24px;
+}
+
+.hh-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 3px double var(--hh-navy);
+    outline: 1px solid var(--hh-navy);
+    outline-offset: 5px;
     text-align: center;
-    padding: 44px 24px;
+    box-shadow: 0 16px 36px rgba(5, 20, 70, 0.45);
 }
 
-.happy-hour h2 {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: var(--red);
-    text-shadow: 1px 1px 0 var(--yellow), -1px -1px 0 var(--yellow), 1px -1px 0 var(--yellow), -1px 1px 0 var(--yellow);
-    margin-bottom: 8px;
+.hh-band {
+    background: var(--hh-navy);
+    padding: 22px 24px;
 }
 
-.happy-hour-time {
-    font-size: 0.72rem;
+.hh-band img {
+    height: 72px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.hh-body {
+    padding: 22px 32px 36px;
+    color: var(--hh-ink);
+}
+
+.hh-title {
+    font-family: 'Kaushan Script', cursive;
+    font-weight: 400;
+    font-size: 4rem;
+    line-height: 1.15;
+    color: var(--hh-orange);
+    margin-bottom: 12px;
+}
+
+.hh-deal,
+.hh-price,
+.hh-time,
+.hh-specials-title,
+.special h4,
+.special p {
+    font-family: 'Oswald', var(--font-main);
+}
+
+.hh-deal {
+    font-size: 1.35rem;
     font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--yellow);
+    color: var(--hh-ink);
     margin-bottom: 10px;
 }
 
-.happy-hour-deal {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 34px;
-}
-
-.happy-hour-deal span {
-    color: var(--yellow);
-    margin-left: 6px;
-}
-
-.happy-hour h3 {
-    font-size: 0.7rem;
+.hh-price {
+    font-size: 1.6rem;
     font-weight: 700;
-    letter-spacing: 0.22em;
+    color: var(--hh-ink);
+    margin-bottom: 10px;
+}
+
+.hh-time {
+    font-size: 1.35rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--yellow);
-    margin-bottom: 20px;
+    color: var(--hh-ink);
+}
+
+.hh-rule {
+    width: 100%;
+    max-width: 520px;
+    height: 3px;
+    background: var(--hh-red);
+    border-bottom: 1px solid var(--hh-navy);
+    margin: 26px auto 22px;
+}
+
+.hh-specials-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--hh-orange);
+    margin-bottom: 18px;
 }
 
 .specials-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.special {
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    padding: 16px 12px;
+    gap: 22px 18px;
 }
 
 .special h4 {
-    font-size: 0.66rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 6px;
+    color: var(--hh-ink);
+    margin-bottom: 2px;
 }
 
 .special p {
-    font-size: 0.62rem;
-    color: var(--white-dim);
-    line-height: 1.7;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--hh-ink);
+    line-height: 1.4;
 }
 
 .wine-wrap {
@@ -1578,6 +1617,27 @@ footer a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .happy-hour {
+        padding: 36px 16px;
+    }
+
+    .hh-body {
+        padding: 18px 20px 30px;
+    }
+
+    .hh-title {
+        font-size: 3.2rem;
+    }
+
+    .hh-deal,
+    .hh-time {
+        font-size: 1.15rem;
+    }
+
+    .hh-price {
+        font-size: 1.4rem;
+    }
+
     .wine-wrap {
         grid-template-columns: 1fr;
     }
@@ -1586,6 +1646,31 @@ footer a:hover {
 @media (max-width: 480px) {
     .specials-grid {
         grid-template-columns: 1fr;
+    }
+
+    .happy-hour {
+        padding: 28px 12px;
+    }
+
+    .hh-band img {
+        height: 56px;
+    }
+
+    .hh-body {
+        padding: 14px 14px 26px;
+    }
+
+    .hh-title {
+        font-size: 2.7rem;
+    }
+
+    .hh-deal,
+    .hh-time {
+        font-size: 1rem;
+    }
+
+    .special h4 {
+        font-size: 1.1rem;
     }
 }
 
@@ -1841,3 +1926,44 @@ footer a:hover {
     }
 }
 .menus-hero .delivery-row { margin: 18px auto 0; }
+
+/* ══════════════════════════════════════════
+   WORK IN PROGRESS PAGES
+   ══════════════════════════════════════════ */
+.wip {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 64px 24px;
+    background: var(--blue);
+}
+
+.wip-icon {
+    font-size: 2.4rem;
+    color: var(--yellow);
+    margin-bottom: 18px;
+}
+
+.wip h1 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+}
+
+.wip p {
+    font-size: 0.72rem;
+    color: var(--white-dim);
+    line-height: 1.9;
+    max-width: 440px;
+    margin: 0 auto 28px;
+}
+
+.wip .cta-row {
+    width: 100%;
+}
