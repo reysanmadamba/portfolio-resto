@@ -117,6 +117,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =========================
+    // ART LIGHTBOX (ART PAGE ONLY)
+    // =========================
+    const lightbox = document.getElementById("artLightbox");
+
+    if (lightbox) {
+        const lbFrame = document.getElementById("artLightboxFrame");
+        const lbTitle = document.getElementById("artLightboxTitle");
+        const lbArtist = document.getElementById("artLightboxArtist");
+        const lbDesc = document.getElementById("artLightboxDesc");
+
+        const openArt = (card) => {
+            lbFrame.innerHTML = card.querySelector(".art-frame").innerHTML;
+            lbTitle.textContent = card.querySelector(".art-title")?.textContent || "";
+            lbArtist.textContent = card.querySelector(".art-artist")?.textContent || "";
+            lbDesc.textContent = card.querySelector(".art-desc")?.textContent || "";
+            lightbox.classList.add("active");
+        };
+
+        const closeArt = () => lightbox.classList.remove("active");
+
+        document.querySelectorAll(".art-card").forEach(card => {
+            card.addEventListener("click", () => openArt(card));
+            card.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openArt(card);
+                }
+            });
+        });
+
+        document.getElementById("artLightboxClose").onclick = closeArt;
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) closeArt();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeArt();
+        });
+    }
+
+    // =========================
     // FORMAT FUNCTION (SHARED)
     // =========================
     function formatToToast(date, time) {
